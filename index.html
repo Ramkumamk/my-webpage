@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aromist Perfumes</title>
+<meta name="description" content="Aromist Perfumes offers premium attars, perfumes, pure oudh, bakhoor and home & car sprays for retail, wholesale and bulk orders in Tamil Nadu.">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--deep:hsl(0,0%,8%);--navy:hsl(0,0%,12%);--sky:hsl(205,85%,55%);
+--ice:hsl(195,70%,92%);--glow:hsl(45,100%,55%);--warm:hsl(45,90%,55%);
+--primary:hsl(45,100%,55%);--bg:hsl(0,0%,10%);--fg:hsl(0,0%,95%);
+--muted:hsl(0,0%,60%);--border:hsl(0,0%,25%);--card:hsl(0,0%,15%);
+--radius:0.75rem;
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.logo, .hero h1{font-family:'Great Vibes', cursive}
+a{text-decoration:none;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 1rem}
+.gradient-hero{background:linear-gradient(135deg,var(--deep) 0%,var(--navy) 40%,var(--primary) 100%)}
+.gradient-accent{background:linear-gradient(90deg,var(--primary) 0%,var(--glow) 100%)}
+.glass-card{background:hsla(0,0%,100%,0.08);backdrop-filter:blur(12px);border:1px solid hsla(0,0%,100%,0.12)}
+.text-gradient{background:linear-gradient(90deg,#fff,var(--ice));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;font-weight:600;border-radius:var(--radius);border:none;cursor:pointer;transition:opacity .2s,transform .1s}
+.btn:active{transform:scale(0.97)}
+.btn-primary{padding:0.875rem 1.75rem;font-size:1rem;color:#fff}.btn-primary{background:linear-gradient(90deg,var(--primary),var(--glow))}
+.btn-primary:hover{opacity:.9}
+.btn-glass{padding:0.875rem 1.75rem;font-size:1rem;color:#fff}.btn-glass{background:hsla(0,0%,100%,.08);backdrop-filter:blur(12px);border:1px solid hsla(0,0%,100%,.12)}
+.btn-glass:hover{background:hsla(0,0%,100%,.15)}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(24px);filter:blur(4px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1),filter .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0);filter:blur(0)}
+
+/* ---- NAVBAR ---- */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:hsla(220,60%,12%,.9);backdrop-filter:blur(12px);border-bottom:1px solid hsla(0,0%,100%,.1)}
+nav .inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+nav .logo{display:flex;align-items:center;gap:0.5rem;color:#fff;font-weight:700;font-size:1.25rem}
+nav .logo svg{color:var(--glow)}
+nav .links{display:flex;align-items:center;gap:2rem}
+nav .links a{color:hsla(0,0%,100%,.7);font-size:.875rem;transition:color .2s}
+nav .links a:hover{color:#ffffff}
+nav .cta{font-size:.875rem;padding:.5rem 1.25rem;border-radius:.5rem;color:#fff;font-weight:600}
+.hamburger{display:none;background:none;border:none;color:hsla(0,0%,100%,.8);cursor:pointer}
+.mobile-menu{display:none;padding:0 1rem 1rem;background:hsla(220,60%,12%,.95);backdrop-filter:blur(12px);border-top:1px solid hsla(0,0%,100%,.1)}
+.mobile-menu a{display:block;padding:.75rem 0;color:hsla(0,0%,100%,.7);border-bottom:1px solid hsla(0,0%,100%,.05);transition:color .2s}
+.mobile-menu a:hover{color:#fff}
+.mobile-menu .cta-m{display:block;margin-top:.75rem;text-align:center;padding:.625rem 1.25rem;border-radius:.5rem;color:#fff;font-weight:600}
+@media(max-width:768px){nav .links{display:none}.hamburger{display:block}.mobile-menu.open{display:block}}
+
+/* ---- HERO ---- */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;padding-top:64px}
+.hero .orb{position:absolute;border-radius:50%;filter:blur(100px);animation:pulseGlow 3s ease-in-out infinite}
+.hero .orb1{top:80px;right:10%;width:288px;height:288px;background:hsla(205,85%,55%,.2)}
+.hero .orb2{bottom:80px;left:5%;width:224px;height:224px;background:hsla(190,80%,45%,.15);animation-delay:1.5s}
+.hero .content{position:relative;max-width:720px;padding:6rem 0}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:.5rem;color:var(--glow);font-size:.875rem;font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2.25rem,5vw,3.75rem);font-weight:800;color:#fff;line-height:1.08;letter-spacing:-.02em;margin-bottom:1.5rem;text-wrap:balance}
+.hero .subtitle{font-size:1.125rem;color:hsla(0,0%,100%,.6);max-width:540px;margin-bottom:2.5rem;line-height:1.6;text-wrap:pretty}
+.hero .actions{display:flex;flex-wrap:wrap;gap:1rem}
+.hero .pills{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:3.5rem}
+.hero .pill{display:flex;align-items:center;gap:.5rem;color:hsla(0,0%,100%,.8);font-size:.875rem;padding:.5rem 1rem;border-radius:9999px}
+.hero .pill svg{color:var(--glow)}
+@keyframes pulseGlow{0%,100%{opacity:.6}50%{opacity:1}}
+
+/* ---- FEATURES STRIP ---- */
+.features-strip{position:relative;z-index:10;margin-top:-4rem;padding:0 1rem}
+.features-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+@media(max-width:1024px){.features-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.features-grid{grid-template-columns:1fr}}
+.feature-card{background:var(--card);border-radius:1rem;padding:1.5rem;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.05);transition:transform .3s,box-shadow .3s}
+.feature-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.3);border-color:var(--primary)}
+.feature-icon{width:44px;height:44px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;margin-bottom:1rem;color:#fff}
+.feature-card h3{font-weight:700;margin-bottom:.25rem}
+.feature-card p{font-size:.875rem;color:var(--muted);line-height:1.6}
+
+/* ---- PLANS ---- */
+.plans{padding:6rem 1rem;background:var(--bg)}
+.section-header{text-align:center;margin-bottom:4rem}
+.section-header h2{font-size:clamp(1.75rem,3vw,2.25rem);font-weight:800;letter-spacing:-.02em;margin-bottom:.75rem;text-wrap:balance}
+.section-header p{color:var(--muted);max-width:480px;margin:0 auto}
+.plans-category{margin-bottom:4rem}
+.plans-category h3{display:flex;align-items:center;gap:.5rem;font-size:1.25rem;font-weight:700;margin-bottom:1.5rem}
+.plans-category h3 svg{color:var(--primary)}
+.plans-grid{display:grid;gap:1.25rem}
+.plans-grid.internet{grid-template-columns:repeat(4,1fr)}
+.plans-grid.tv{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1024px){.plans-grid.internet,.plans-grid.tv{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.plans-grid.internet,.plans-grid.tv{grid-template-columns:1fr}}
+.plan-card{position:relative;background:var(--card);border-radius:1rem;padding:1.5rem;border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.3);display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s,border-color .3s}
+.plan-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(212,175,55,.15);border-color:var(--primary)}
+.plan-card.popular{border-color:var(--primary);box-shadow:0 4px 24px hsla(45,100%,55%,.15)}
+.plan-badge{position:absolute;top:-12px;left:1.5rem;font-size:.75rem;font-weight:700;color:#fff;padding:.25rem .75rem;border-radius:9999px;display:flex;align-items:center;gap:.25rem}
+.plan-card h4{font-size:1.125rem;font-weight:700;margin-bottom:.25rem}
+.plan-price{font-size:1.875rem;font-weight:800;color:var(--primary);letter-spacing:-.02em;margin-bottom:.75rem}
+.plan-details{font-size:.875rem;color:var(--muted);margin-bottom:.25rem}
+.plan-card .spacer{flex:1}
+.plan-btn{width:100%;padding:.75rem;border-radius:var(--radius);color:#fff;font-weight:600;font-size:1rem;border:none;cursor:pointer;transition:opacity .2s,transform .1s;margin-top:1.5rem}
+.plan-btn:hover{opacity:.9}
+.plan-btn:active{transform:scale(.97)}
+
+/* ---- ABOUT ---- */
+.about{padding:6rem 1rem}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+@media(max-width:1024px){.about-grid{grid-template-columns:1fr}}
+.about h2{font-size:clamp(1.75rem,3vw,2.25rem);font-weight:800;color:#fff;letter-spacing:-.02em;margin-bottom:1rem;text-wrap:balance}
+.about p{color:hsla(0,0%,100%,.6);line-height:1.6;margin-bottom:1rem}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.stat-card{border-radius:1rem;padding:1.5rem;text-align:center}
+.stat-card svg{color:var(--glow);margin:0 auto .75rem}
+.stat-value{font-size:1.5rem;font-weight:800;color:#fff;letter-spacing:-.02em}
+.stat-label{font-size:.875rem;color:hsla(0,0%,100%,.5);margin-top:.25rem}
+
+/* ---- CONTACT ---- */
+.contact{padding:6rem 1rem;background:var(--bg)}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:2rem;max-width:600px;margin:0 auto}
+.contact-box{background:var(--card);border-radius:1rem;padding:2rem;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.3)}
+.contact-box h3{font-size:1.25rem;font-weight:700;margin-bottom:1rem;color:#fff}
+.contact-box p{color:var(--muted);margin-bottom:1.5rem;font-size:.95rem}
+.contact-item{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.contact-item svg{color:var(--primary);width:20px;height:20px;flex-shrink:0}
+.contact-item span{color:var(--fg);font-size:.95rem}
+
+/* ---- FOOTER ---- */
+footer{background:var(--deep);color:hsla(0,0%,100%,.6);padding:3rem 1rem}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2rem}
+@media(max-width:640px){.footer-grid{grid-template-columns:1fr}}
+footer h4{color:#fff;font-weight:600;margin-bottom:.75rem}
+footer ul{list-style:none}
+footer ul li{margin-bottom:.5rem;font-size:.875rem}
+footer ul li a{transition:color .2s}
+footer ul li a:hover{color:#fff}
+.footer-bottom{margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid hsla(0,0%,100%,.1);text-align:center;font-size:.75rem;color:hsla(0,0%,100%,.4)}
+.contact-item{display:flex;align-items:center;gap:.5rem}
+.contact-item svg{color:var(--glow);width:16px;height:16px}
+
+/* ---- MODAL ---- */
+.modal-overlay{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.modal-overlay.open{opacity:1;pointer-events:auto}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px)}
+.modal-box{position:relative;background:var(--card);border-radius:1rem;border:1px solid var(--border);box-shadow:0 24px 64px rgba(0,0,0,.2);width:100%;max-width:420px;padding:1.5rem 2rem;transform:scale(.95) translateY(16px);transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.modal-overlay.open .modal-box{transform:scale(1) translateY(0)}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);cursor:pointer;transition:color .2s}
+.modal-close:hover{color:var(--fg)}
+.modal h3{font-size:1.25rem;font-weight:700;margin-bottom:.25rem}
+.modal .plan-info{font-size:.875rem;color:var(--muted);margin-bottom:1.5rem}
+.modal .space-y>*+*{margin-top:1rem}
+.modal .success-view{text-align:center;padding:1.5rem 0}
+.modal .success-view svg{color:var(--glow);margin:0 auto 1rem}
+.modal .success-view h3{margin-bottom:.5rem}
+.modal .success-view p{color:var(--muted);font-size:.875rem;margin-bottom:1.5rem}
+
+/* SVG icons inline */
+svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+
+.plans-wrapper {
+  position: relative;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+}
+
+.plans-carousel {
+  overflow: hidden;
+  flex: 1;
+}
+
+.plans-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.plan-slide {
+  min-width: 25%; /* 👈 4 cards visible */
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Navigation */
+.nav {
+  position: relative;
+  background: var(--primary);
+  color: #000;
+  border: none;
+  padding: 12px 16px;
+  cursor: pointer;
+  z-index: 20;
+  border-radius: 50%;
+  opacity: 0.9;
+  font-size: 1.25rem;
+  font-weight: bold;
+  transition: opacity 0.2s, background 0.2s;
+  box-shadow: 0 4px 12px rgba(212,175,55,0.3);
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav:hover {
+  opacity: 1;
+  background: hsl(45,100%,60%);
+  box-shadow: 0 6px 16px rgba(212,175,55,0.5);
+}
+
+.nav.left { order: -1; }
+.nav.right { order: 1; }
+
+/* 📱 Mobile: show 2 cards */
+@media (max-width: 768px) {
+  .plan-slide {
+    min-width: 50%;
+  }
+}
+
+/* 📱 Small mobile: show 1 card */
+@media (max-width: 480px) {
+  .plan-slide {
+    min-width: 100%;
+  }
+}
+
+.thank_box{
+background:white;
+width:90%;
+max-width:400px;
+margin:auto;
+padding:30px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.thank_box a{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+background:#0073e6;
+color:white;
+padding:10px 20px;
+border-radius:6px;
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="container inner">
+    <a href="#home" class="logo">
+      <svg viewBox="0 0 24 24" width="24" height="24"><path d="M8 7h8v2H8z"/><path d="M9 9v8h6V9"/><path d="M10 2h4v4h-4z"/><path d="M8 17h8"/></svg>
+       Aromist Perfumes
+    </a>
+    <div class="links">
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#products" class="cta gradient-accent btn">Explore Scents</a>
+    </div>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+      <svg id="menuIcon" viewBox="0 0 24 24" width="24" height="24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#products" onclick="toggleMenu()">Products</a>
+    <a href="#about" onclick="toggleMenu()">About</a>
+    <a href="#contact" onclick="toggleMenu()">Contact</a>
+    <a href="#products" class="cta-m gradient-accent" onclick="toggleMenu()">Explore Scents</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero gradient-hero" id="home">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="container">
+    <div class="content">
+      <div class="eyebrow reveal">
+        <svg viewBox="0 0 24 24" width="16" height="16"><path d="M8 7h8v2H8z"/><path d="M9 9v8h6V9"/><path d="M10 2h4v4h-4z"/><path d="M8 17h8"/></svg>
+        Retail | Wholesale | Bulk Orders
+      </div>
+      <h1 class="reveal" style="transition-delay:.1s">Aromist Perfumes — <span class="text-gradient">200+ Premium Fragrances</span> Curated For Excellence</h1>
+      <p class="subtitle reveal" style="transition-delay:.2s">Authentic Arabian attars, pure ouds, and international premium fragrances for connoisseurs, wholesalers, and bulk buyers. Retail, wholesale, and bulk orders available.</p>
+      <div class="actions reveal" style="transition-delay:.35s">
+        <a href="#products" class="btn btn-primary">Shop Collections <svg viewBox="0 0 24 24" width="16" height="16"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#contact" class="btn btn-glass">Request Quote</a>
+      </div>
+      <div class="pills reveal" style="transition-delay:.55s">
+        <span class="pill glass-card"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M8 7h8v2H8z"/><path d="M9 9v8h6V9"/><path d="M10 2h4v4h-4z"/></svg> Premium Attars</span>
+        <span class="pill glass-card"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M7 7h10v2H7z"/><path d="M8 9v6h8V9"/><path d="M10 15h4"/></svg> Pure Oudh</span>
+        <span class="pill glass-card"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M6 4h12v4H6z"/><path d="M8 8v10h8V8"/><path d="M10 18h4"/></svg> Home & Car Sprays</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES STRIP -->
+<section class="features-strip">
+  <div class="container">
+    <div class="features-grid" id="featuresGrid"></div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="plans" id="products">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>200+ Premium Fragrances</h2>
+      <p>Discover our curated collection of authentic Arabian and international premium fragrances for wholesale, retail and bulk orders.</p>
+    </div>
+    <div class="plans-category">
+      <h3 class="reveal"><svg viewBox="0 0 24 24"><path d="M8 7h8v2H8z"/><path d="M9 9v8h6V9"/><path d="M10 2h4v4h-4z"/><path d="M8 17h8"/></svg> Premium Collection</h3>
+      <div class="plans-wrapper">
+  <button class="nav left" onclick="slidePlans('products', -1)">❮</button>
+  
+  <div class="plans-carousel">
+    <div class="plans-track" id="productsPlans"></div>
+  </div>
+  
+  <button class="nav right" onclick="slidePlans('products', 1)">❯</button>
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about gradient-hero" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal">
+        <h2>About Aromist Perfumes</h2>
+        <p>Aromist Perfumes is a premium fragrance supplier offering an exclusive collection of 200+ authentic Arabian attars, rare ouds, and international branded fragrances.</p>
+        <p>Based in Seetharampalayam, Tiruchengode, we serve retail boutiques, wholesalers, and bulk buyers across Tamil Nadu with authentic, pure, and guaranteed fragrances. Each fragrance is carefully curated for quality and authenticity.</p>
+      </div>
+      <div class="stats-grid" id="statsGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Get in Touch</h2>
+      <p>Ready to order? Contact us on WhatsApp for samples, pricing, and bulk fragrance solutions.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-box reveal" style="transition-delay:.15s">
+        <h3>Connect With Us</h3>
+        <p>Reach out directly for premium fragrance orders and bulk inquiries.</p>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>aromist.perfumes@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><path d="M12 17v-5M12 7v-.01"/><path d="M4.22 4.22a8 8 0 0 1 11.56 0M2.08 2.08a12 12 0 0 1 19.84 0M7.71 7.71a4 4 0 0 1 5.64 0M5.64 5.64a8 8 0 0 0 0 11.31"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" stroke="none" fill="none"/><g><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-13c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/></g></svg>
+          <a href="https://instagram.com/aromist.perfumes" target="_blank" style="color:var(--primary);text-decoration:none">@aromist.perfumes</a>
+        </div>
+        <a href="https://wa.me/918883514919?text=Hi%20Aromist%20Perfumes,%20I%20am%20interested%20in%20your%20premium%20fragrance%20collection." target="_blank" class="btn btn-primary" style="margin-top:1.5rem;display:inline-flex">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.946 1.347l-.355.192-.368-.06c-1.286-.264-2.514-.666-3.537-1.228l-.427-.254-.472.15C.705 6.438 0 7.07 0 8.107v4.048c0 4.442 3.358 8.054 7.529 8.368.529.046 1.699.048 2.052.01 4.476-.959 7.886-4.806 8.772-9.737.393-2.359.196-4.944-.543-7.017l-.262-.898.074-.046c.934-.586 1.963-1.54 2.303-2.214l.21-.441-.424-.043c-1.33-.137-2.593-.424-3.953-.936l-.411-.194-.279.186a9.884 9.884 0 00-1.587 2.572 10.042 10.042 0 00-.314 1.039l-.023.167-.19.013z"/></svg>
+          WhatsApp Us Now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#home" class="logo" style="display:inline-flex;align-items:center;gap:.5rem;color:#fff;font-weight:700;font-size:1.125rem;margin-bottom:.75rem">
+          <svg viewBox="0 0 24 24" width="20" height="20" style="color:var(--glow)"><path d="M8 7h8v2H8z"/><path d="M9 9v8h6V9"/><path d="M10 2h4v4h-4z"/><path d="M8 17h8"/></svg>
+          Aromist Perfumes
+        </a>
+        <p style="font-size:.875rem;line-height:1.6;max-width:280px">Delivering premium attars, pure oudh, bakhoor and luxury sprays for retail, wholesale, and bulk customers across Tamil Nadu.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact Info</h4>
+        <ul>
+          <li class="contact-item"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> aromist.perfumes@gmail.com</li>
+          <li class="contact-item"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg> @aromist.perfumes</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> Aromist Perfumes. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- BUY NOW MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-backdrop" onclick="closeModal()"></div>
+  <div class="modal-box modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">
+      <svg viewBox="0 0 24 24" width="20" height="20"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script src="./index.js">
+
+</script>
+</body>
+</html>
